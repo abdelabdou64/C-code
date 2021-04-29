@@ -68,7 +68,7 @@ void Afficher_ligne(listeP l)
 
 
 
-listeP Ajout_ligne(liste_ligne *li , char mot[20] , int taille)
+listeP Ajout_ligne(liste_ligne *li)
 {
   listeP element  =  (listeP)malloc(sizeof(liste_ligne)) ;
    if (element == NULL )
@@ -76,8 +76,8 @@ listeP Ajout_ligne(liste_ligne *li , char mot[20] , int taille)
       printf("erreur");
      }
 
- element->nombremots = taille ;
- // dyal other liste
+ element-> nombremots = 0 ;
+ element -> Pmot = NULL ;
  element-> liste_suivant = NULL ;
 
  if (liste_est_vide(li))
@@ -87,9 +87,11 @@ listeP Ajout_ligne(liste_ligne *li , char mot[20] , int taille)
     l2=li;
     while (l2->liste_suivant !=NULL )
     {
-      l2->liste_suivant = element ;
-      return li ;
-    }
+      l2 = l2->liste_suivant   ;
+
+    } l2->liste_suivant = element;
+    	printf("ligne ajoutee avec succes\n");
+    return li ;
 }
 
 listemotsP Ajouter_mot(listemotsP pmot , listeP pliste , char text[20], int numrligne)
@@ -168,7 +170,7 @@ char Affiche_Ligne (listemotsP pmot, listeP pliste ,int numrligne)
            else {
            while (P_help->Pmot != NULL) // parcourir la liste mot dans la ligne de numero donne
            {
-                	printf("[%s] ",P_help->Pmot);
+                	    printf("[%s] ",P_help->Pmot);
                       pmot = pmot->motsuivent ; // en passe a la liste suivante
 
            }
@@ -180,25 +182,58 @@ char Affiche_Ligne (listemotsP pmot, listeP pliste ,int numrligne)
          cpt+=1;
         }
   if (cpt != numrligne )
-  printf("la ligne de numero : %d n'existe pas ",numrligne);
+  printf("la ligne de numero : %d n'existe pas \n",numrligne);
   return NULL ;
     }
 }
 
 
 
-main () {
-listeP monliste = nouvelle_liste() ;
-listeP l2 ;
- if (liste_est_vide(monliste))
-   printf("la liste est vide \n");
-   else
-   printf("la liste est n'est pas vide \n");
+// -------------------------------------------------------------------------
+void afficher_text(listeP l)
+{ int cpt ;
 
-  printf("la taille de la liste =  %d",list_lenght(monliste));
-listemotsP l1 ;
+   if (liste_est_vide(l))
+    {
+      ("erreur , ajouter une liste d'abord \n");
+    }
+    listeP P_help = l ;
+     // parcourir la liste ligne
 
-  Afficher_ligne(monliste);
+     while (P_help != NULL) // parcourir la liste ligne   >= 1
+     { listemotsP Pointeur = P_help->Pmot ;
+       cpt = 1 ;
+
+       if (P_help-> Pmot = NULL)  // >= un mot
+       printf("NULL\n");
+          // parcourir la liste mot
+
+          while (P_help-> Pmot != NULL)
+         {
+            printf("[%s]-> \t",Pointeur->mots);
+          Pointeur=Pointeur->motsuivent ;
+          //  afficher_text(P_help->Pmot->motsuivent); // fonction recursive
+        }
+        cpt+=1 ;
+       }
+
 
 }
- 
+
+main () {
+  listeP maliste,maliste2;
+  maliste = nouvelle_liste() ;
+  maliste2 = nouvelle_liste() ;
+listemotsP mot1 =nouvelle_liste() ;
+maliste = Ajout_ligne(maliste);
+maliste2 = Ajout_ligne(maliste);
+
+maliste = Ajouter_mot(mot1,maliste,"ABCDE",1);
+maliste2 = Ajouter_mot(mot1,maliste,"Abdelilah",2);
+Affiche_Ligne(mot1,maliste,1);
+Affiche_Ligne(mot1,maliste,2);
+
+
+
+
+}
