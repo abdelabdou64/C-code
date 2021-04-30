@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
+#include <string.h>
 typedef struct
 {
   int nombremots ;                      // nombre de mots de la liste
@@ -160,7 +160,7 @@ char Affiche_Ligne (listemotsP pmot, listeP pliste ,int numrligne)
     else {
       int cpt = 1 ;
       listeP P_help = pliste ;
-        while (P_help != NULL) // parcourir la liste ligne
+        while (P_help->liste_suivant != NULL) // parcourir la liste ligne
         {
           if (cpt == numrligne)
             if (P_help->Pmot == NULL)
@@ -190,7 +190,7 @@ char Affiche_Ligne (listemotsP pmot, listeP pliste ,int numrligne)
 
 
 // -------------------------------------------------------------------------
-void afficher_text(listeP l)
+void afficher(liste_ligne *l)
 { int cpt ;
 
    if (liste_est_vide(l))
@@ -202,7 +202,7 @@ void afficher_text(listeP l)
 
      while (P_help != NULL) // parcourir la liste ligne   >= 1
      { listemotsP Pointeur = P_help->Pmot ;
-       cpt = 1 ;
+      // cpt = 1 ;
 
        if (P_help-> Pmot = NULL)  // >= un mot
        printf("NULL\n");
@@ -211,29 +211,94 @@ void afficher_text(listeP l)
           while (P_help-> Pmot != NULL)
          {
             printf("[%s]-> \t",Pointeur->mots);
-          Pointeur=Pointeur->motsuivent ;
+           Pointeur=Pointeur->motsuivent ;
           //  afficher_text(P_help->Pmot->motsuivent); // fonction recursive
         }
-        cpt+=1 ;
+        P_help = P_help-> liste_suivant ;
        }
 
 
 }
 
+//--------------------------------------------------------
+int calucul_mot(listeP pliste){
+int cpt = 0 ;
+listeP l = pliste ;
+  while (l->liste_suivant != NULL)
+  {
+      cpt = cpt + l->nombremots ;
+    }
+return cpt ;
+}
+
+// methode 1
+char mot_palindromes(listeP pliste ) {
+
+listeP  l = pliste ;
+char tab[15];
+char tab_mot_palindromes [100] ;
+   while ( l-> liste_suivant != NULL ) // ou bien for (int j =0 ; j<=taille ; j++)
+   { // pour parcourir la liste ligne
+
+      for  (int i = 0 ; i < l-> nombremots ; i++ )
+      {
+        strcpy(tab,l->Pmot ) ;
+       // strrev(tab );
+        if (strcmp(tab, l->Pmot ) == 0)               // pour parcourir la liste mots
+        {  // Comparing input string with the reverse string
+              printf("The string is a palindrome.\n");
+              strcpy(tab_mot_palindromes ,tab) ;
+            }
+            else
+             printf("The string isn't a palindrome.\n");
+      }
+   }
+
+return tab_mot_palindromes ;
+}
+
+
+void Maj_text(listeP pliste){
+    listeP l=pliste;
+    listemotsP mhelp;
+
+    while(l!=NULL){
+        mhelp= l->Pmot;
+        if(mhelp->mots>='a' && mhelp->mots<='z'){ // instruction MAJ basé sur code ascii
+            mhelp->mots[0]=+32;
+        }
+        while(mhelp!=NULL){  // affichage des mots
+            printf("%s ",mhelp->mots);
+            mhelp=mhelp->motsuivent; // en passe a la liste suivante
+        }
+        l=l->liste_suivant;
+    }
+}
+
+
 main () {
-  listeP maliste,maliste2;
+
+
+  liste_ligne *maliste , *l2;
   maliste = nouvelle_liste() ;
-  maliste2 = nouvelle_liste() ;
+  l2 = NULL ;
+     // lignes
+  maliste = Ajout_ligne(maliste);
+
+  int a = list_lenght(maliste) ;
+  printf("taille de liste =   %d:",a);
+
+
 listemotsP mot1 =nouvelle_liste() ;
-maliste = Ajout_ligne(maliste);
-maliste2 = Ajout_ligne(maliste);
+listemotsP mot2 =nouvelle_liste() ;
+listemotsP mot3 =nouvelle_liste() ;
 
-maliste = Ajouter_mot(mot1,maliste,"ABCDE",1);
-maliste2 = Ajouter_mot(mot1,maliste,"Abdelilah",2);
-Affiche_Ligne(mot1,maliste,1);
-Affiche_Ligne(mot1,maliste,2);
+maliste = Ajouter_mot(mot1,maliste,"Asmae",1);
 
+int n = calucul_mot(l2);
+printf(" nombre mot = %d ------>",n);
 
+afficher(maliste);
 
 
 }
