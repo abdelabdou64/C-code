@@ -1,0 +1,39 @@
+SURVOMOTOR
+a) Concept et fonctionnement :
+Un servomoteur est un actionneur rotatif ou un moteur qui
+permet un contrôle précis en termes de position angulaire,
+d'accélération et de vitesse, capacités qu'un moteur ordinaire ne
+possède pas. Il utilise un moteur ordinaire et l'associe à un
+capteur pour le retour de position. Le contrôleur est la partie la
+plus sophistiquée du servomoteur, car il est spécialement conçu
+à cet effet.
+C’est un ensemble mécanique et électronique comprenant :
+- Un moteur à courant continu
+- Un réducteur en sortie de ce moteur diminuant la vitesse mais augmentant le couple ;
+- Un potentiomètre (faisant fonction de diviseur résistif) qui génère une tension variable,
+proportionnelle à l'angle de l'axe de sortie ;
+- Un dispositif électronique d'asservissement ;
+- Un axe dépassant hors du boîtier avec différents bras ou roues de fixation.
+Le servomoteur a besoin de trois fils de connexion pour fonctionner. Deux fils servent à son
+alimentation, le dernier étant celui qui reçoit le signal de commande :
+• rouge : pour l’alimentation positive (4.5V à 6V en général).
+• noir ou marron : pour la masse (0V).
+• orange, jaune, blanc, … : entrée du signal de commande
+
+
+Contrôle de DEUX SURVOMOTOR avec Joystick
+Comme mentionné précédemment, l'idée est de contrôler deux servomoteurs avec un seul joystick, et
+afficher les directions dans le LCD.
+En se basant sur le concept du fonctionnement du servomoteur et en développant le code du dernier
+chapitre, nous pouvons atteindre cet objectif.
+Nous devons calculer le point où chaque servomoteur va se déplacer, et pour cela l'axe X de joystick sera
+pour le mouvement du premier servomoteur et l'axe Y du joystick contrôlera le mouvement du second
+servomoteur.
+Définir le point de mouvement MVx et MVy :
+- From ( 0 (read value) , 0(write value : angle) ) to (1023, 180 )
+M = (Wv2-Wv1)/ (Rv2-Rv1)
+= 180-0 /1023-0 = 180/1023
+Donc
+Wv-Wv1= M(Rv-Rv1)
+Wv—0 = (180/1023) (Rv-0)
+Wv= (180/1023) *Rv ce point sera le point de mouvement de survomotor1 et aussi suvomotor2 .
