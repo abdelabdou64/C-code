@@ -1,3 +1,17 @@
+
+Ce projet consiste à comment contrôler avec précision la position de deux servomoteurs à l'aide d'un
+joystick. Nous dérivons les équations mathématiques qui vous permettront d'obtenir un contrôle fluide
+et précis du servo. Nous ajoutons également un buzzer au projet pour créer une alarme sonore lorsque
+le bouton du joystick est pressé.
+Et également montrant les coordonnées (X et Y) du joystick dans le LCD que nous avons programmé
+avec les servomoteurs et autres composants.
+Dans ce projet, nous avons réalisé d'autres idées afin d'expliquer la fonction de chaque composant, et la
+combinaison de ces mini-projets (idées) a permis de réaliser le projet de « Contrôler le survomotor avec
+le joystick ».
+
+
+
+
 SURVOMOTOR
 a) Concept et fonctionnement :
 Un servomoteur est un actionneur rotatif ou un moteur qui
